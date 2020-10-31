@@ -33,12 +33,12 @@ namespace BMX
 
         private void HandleMouseClick(object sender, MouseEventArgs e)
         {
-            InputHandler.HandleMouseClick(e, gameState);
+            gameState = InputHandler.HandleMouseClick(e, gameState);
         }
 
         private void HandleKeyPress(Object sender, KeyPressEventArgs e)
         {
-            InputHandler.HandleKeyPress(e, gameState);
+            gameState = InputHandler.HandleKeyPress(e, gameState);
         }
 
         private void Render(object sender, SKPaintSurfaceEventArgs e)

@@ -4,14 +4,14 @@ namespace BMX
 {
     internal static class InputHandler
     {
-        public static void HandleMouseClick(MouseEventArgs e, GameState gameState)
+        public static GameState HandleMouseClick(MouseEventArgs e, GameState gameState)
         {
-            gameState.Reset();
+            return new GameState();
         }
 
-        public static void HandleKeyPress(KeyPressEventArgs e, GameState gameState)
+        public static GameState HandleKeyPress(KeyPressEventArgs e, GameState gameState)
         {
-            gameState.Reset();
+            return new GameState();
         }
     }
 }

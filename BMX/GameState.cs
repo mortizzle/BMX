@@ -2,20 +2,12 @@
 
 namespace BMX
 {
-    internal class GameState
+    internal record GameState
     {
         public int X { get; set; }
         public int Y { get; set; }
-        public GameState()
-        {
-            Reset();
-        }
 
-        public void Reset()
-        {
-            X = 960;
-            Y = 540;
-        }
+        public GameState() => (X, Y) = (960, 540);
     }
 }
 

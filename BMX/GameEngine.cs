@@ -6,10 +6,7 @@ namespace BMX
     {
         public static GameState UpdateGameState(GameState gameState)
         {
-            gameState.X += new Random().Next(20) - 10;
-            gameState.Y += new Random().Next(20) - 10;
-
-            return gameState;
+            return gameState with { X = gameState.X + new Random().Next(20) - 10, Y = gameState.Y + new Random().Next(20) - 10 };
         }
 
     }
