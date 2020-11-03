@@ -12,6 +12,7 @@ namespace BMX
         private readonly SKControl skView;
         private GameState gameState;
         private bool runRenderLoop = true;
+        private const int GameTickLengthMS = 16;
 
         public GameLoop()
         {
@@ -53,11 +54,9 @@ namespace BMX
                 gameState = GameEngine.UpdateGameState(gameState);
                 skView.Invalidate();
 
-                await Task.Delay(16).ConfigureAwait(true);
+                await Task.Delay(GameEngine.GetTickLength(gameState)).ConfigureAwait(true);
             }
         }
-
-
 
         protected override void Dispose(bool disposing)
         {

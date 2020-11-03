@@ -21,8 +21,27 @@ namespace BMX
             return e.KeyChar switch
             {
                 ' ' => gameState.WithAdditionalBmxes(new Bmx { Position = gameState.TrackSegments.First().Position, TargetPoint = gameState.TrackSegments.Skip(1).First().Position }),
+                'p' => gameState with { Paused = !gameState.Paused },
+                '+' => IncreaseSpeed(gameState),
+                '-' => DecreaseSpeed(gameState),
                 _ => gameState
             };
+        }
+
+        private static GameState IncreaseSpeed(GameState gameState) 
+        {
+            var currentSpeed = gameState.GameSpeed;
+            if (currentSpeed == GameSpeed.Normal) return gameState;
+
+            return gameState with { GameSpeed = currentSpeed + 1 };
+        }
+
+        private static GameState DecreaseSpeed(GameState gameState)
+        {
+            var currentSpeed = gameState.GameSpeed;
+            if (currentSpeed == GameSpeed.Snail) return gameState;
+
+            return gameState with { GameSpeed = currentSpeed - 1 };
         }
     }
 }
