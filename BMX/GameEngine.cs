@@ -74,14 +74,14 @@ namespace BMX
             var turningCircleRadius = CalculateTurnRadius(bmx);
             if (!double.IsInfinity(turningCircleRadius))
             {
-                amountRotatedInDegrees = 180 * distanceToMove / (Math.PI * turningCircleRadius);
+                amountRotatedInDegrees = 180 * distanceToMove / (System.Math.PI * turningCircleRadius);
 
-                straightLineDistanceTravelled = 2 * turningCircleRadius * Sine(amountRotatedInDegrees / 2) ;
+                straightLineDistanceTravelled = 2 * turningCircleRadius * Math.Sine(amountRotatedInDegrees / 2) ;
                 straightLineBearing += amountRotatedInDegrees / 2;
             }
 
-            var deltaX = straightLineDistanceTravelled * Cosine(straightLineBearing); // Cos = adj/hyp => adj = hyp * cos
-            var deltaY = straightLineDistanceTravelled * Sine(straightLineBearing); // Sin = opp/hyp => opp = hyp * sin
+            var deltaX = straightLineDistanceTravelled * Math.Cosine(straightLineBearing); // Cos = adj/hyp => adj = hyp * cos
+            var deltaY = straightLineDistanceTravelled * Math.Sine(straightLineBearing); // Sin = opp/hyp => opp = hyp * sin
             var deltaVector = new Vector2((int)-deltaX, (int)-deltaY);
             
             var newFrameBearing = bmx.FrameBearing + amountRotatedInDegrees;
@@ -91,30 +91,22 @@ namespace BMX
             bmx.Position = newPosition;
         }
 
-        private static double Sine(double degrees)
-        {
-            return Math.Sin(DegreesToRadians(degrees));
-        }
-
-        private static double Cosine(double degrees)
-        {
-            return Math.Cos(DegreesToRadians(degrees));
-        }
+       
 
         private static double CalculateTurnRadius(Bmx bmx)
         {
             // Angles may need to be changed to radians
-            var steerAngle = DegreesToRadians(bmx.HandleBarsAngle);
+            var steerAngle = Math.DegreesToRadians(bmx.HandleBarsAngle);
             var wheelBase = 20; // This is determined by how far apart wheel centers are in rendering, we need to abstract this out
 
-            return wheelBase / (steerAngle * Cosine(CasterAngle)); // This should give an approximation of radius according to https://en.wikipedia.org/wiki/Bicycle_and_motorcycle_dynamics
+            return wheelBase / (steerAngle * Math.Cosine(CasterAngle)); // This should give an approximation of radius according to https://en.wikipedia.org/wiki/Bicycle_and_motorcycle_dynamics
         }
         public static double AngleBetweenTwoPoints(Vector2 origin, Vector2 end)
         {
             var xDiff = origin.X - end.X;
             var yDiff = origin.Y - end.Y;
-            var radians = Math.Atan2(yDiff,xDiff);
-            return RadiansToDegrees(radians);
+            var radians = System.Math.Atan2(yDiff, xDiff);
+            return Math.RadiansToDegrees(radians);
         }
 
         private static Vector2 MoveXDistanceFromPointAToPointB(int distance, Vector2 pointA, Vector2 pointB)
@@ -128,14 +120,6 @@ namespace BMX
             return Vector2.Add(pointA, scaledDiffDector);
         }
 
-        private static double DegreesToRadians(double degrees)
-        {
-            return Math.PI * degrees / 180;
-        }
 
-        private static double RadiansToDegrees(double radians)
-        {
-            return 180 * radians / Math.PI;
-        }
     }
 }

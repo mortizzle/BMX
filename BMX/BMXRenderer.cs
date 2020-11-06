@@ -22,10 +22,10 @@ namespace BMX
             var handlerBarsCenter = Vector2.Add(frontWheelCenter, new Vector2(3, 0));
             var riderCenter = Vector2.Add(bmx.Position, new Vector2(7,0));
 
-            DrawWheel(canvas, frontWheelCenter);
-            DrawWheel(canvas, backWheelCenter);
+            DrawWheel(canvas, frontWheelCenter, bmx.HandleBarsAngle);
+            DrawWheel(canvas, backWheelCenter, 0);
             DrawFrame(canvas, frontWheelCenter, backWheelCenter);
-            var (rightHandlebarEnd, leftHandlebarEnd) = DrawHandleBars(canvas, handlerBarsCenter);
+            var (rightHandlebarEnd, leftHandlebarEnd) = DrawHandleBars(canvas, handlerBarsCenter, bmx.HandleBarsAngle);
             DrawRider(canvas, riderCenter, rightHandlebarEnd, leftHandlebarEnd);
 
             canvas.Restore();
@@ -44,19 +44,23 @@ namespace BMX
             canvas.DrawCircle(riderCenter.X-5, riderCenter.Y, 3, RiderHelmetPaint);
         }
 
-        private static (Vector2 rightEnd, Vector2 leftEnd) DrawHandleBars(SKCanvas canvas, Vector2 frontWheelCenter)
+        private static (Vector2 rightEnd, Vector2 leftEnd) DrawHandleBars(SKCanvas canvas, Vector2 frontWheelCenter, double angle)
         {
-            var rightBendRightY = frontWheelCenter.Y - 10;
-            var rightBendLeftY = frontWheelCenter.Y + 10;
-            var rightEnd = new Vector2(frontWheelCenter.X + 5, rightBendRightY - 3);
-            var leftEnd = new Vector2(frontWheelCenter.X + 5, rightBendLeftY + 3);
+            var centerEndRight = new Vector2(frontWheelCenter.X, frontWheelCenter.Y - 10);
+            var centerEndLeft = new Vector2(frontWheelCenter.X, frontWheelCenter.Y + 10);
+            var outerEndRight = new Vector2(centerEndRight.X + 5, centerEndRight.Y - 3);
+            var outerEndLeft = new Vector2(centerEndLeft.X + 5, centerEndLeft.Y + 3);
 
-            canvas.DrawLine(frontWheelCenter.X, rightBendRightY, frontWheelCenter.X, rightBendLeftY, HandlebarPaint);
-            canvas.DrawLine(frontWheelCenter.X, rightBendRightY, rightEnd.X, rightEnd.Y, HandlebarPaint);
-            canvas.DrawLine(frontWheelCenter.X, rightBendLeftY, leftEnd.X, leftEnd.Y, HandlebarPaint);
+            var centerEndRightTransformed = centerEndRight.RotateAbout(frontWheelCenter, angle);
+            var centerEndLeftTransformed = centerEndLeft.RotateAbout(frontWheelCenter, angle);
+            var outerEndRightTransformed = outerEndRight.RotateAbout(frontWheelCenter, angle);
+            var outerEndLeftTransformed = outerEndLeft.RotateAbout(frontWheelCenter, angle);
 
-            return (rightEnd, leftEnd);
+            canvas.DrawLine(centerEndRightTransformed.X, centerEndRightTransformed.Y, centerEndLeftTransformed.X, centerEndLeftTransformed.Y, HandlebarPaint);
+            canvas.DrawLine(centerEndRightTransformed.X, centerEndRightTransformed.Y, outerEndRightTransformed.X, outerEndRightTransformed.Y, HandlebarPaint); 
+            canvas.DrawLine(centerEndLeftTransformed.X, centerEndLeftTransformed.Y, outerEndLeftTransformed.X, outerEndLeftTransformed.Y, HandlebarPaint);
 
+            return (outerEndRightTransformed, outerEndLeftTransformed);
         }
 
         private static void DrawFrame(SKCanvas canvas, Vector2 frontWheelCenter, Vector2 backWheelCenter)
@@ -64,9 +68,12 @@ namespace BMX
             canvas.DrawLine(frontWheelCenter.X, frontWheelCenter.Y, backWheelCenter.X, backWheelCenter.Y, FramePaint);
         }
 
-        private static void DrawWheel(SKCanvas canvas, Vector2 position)
+        private static void DrawWheel(SKCanvas canvas, Vector2 position, double angle)
         {
+            canvas.Save();
+            canvas.RotateDegrees((float)angle, position.X, position.Y);
             canvas.DrawOval(position.X, position.Y, 10, 3f, WheelPaint);
+            canvas.Restore();
         }
     }
 }
