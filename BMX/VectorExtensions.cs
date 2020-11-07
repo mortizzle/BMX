@@ -23,5 +23,16 @@ namespace BMX
 
             return new Vector2(newX, newY);
         }
+
+        public static float BearingTo(this Vector2 point, Vector2 targetPoint)
+        {
+            var xDiff = point.X - targetPoint.X;
+            var yDiff = point.Y - targetPoint.Y;
+            var radians = System.Math.Atan2(yDiff, xDiff);
+            var bearing  = (float) Math.RadiansToDegrees(radians);
+            if (bearing < 0) bearing += 360;
+
+            return bearing;
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace BMX
                 e.Surface.Canvas.DrawText($"Bmx Target: {firstBmx.TargetPoint}", 20, 80, new SKPaint() { Color = SKColors.Black, TextSize = 15, IsAntialias = true });
                 e.Surface.Canvas.DrawText($"Bmx Bearing: {firstBmx.FrameBearing}", 20, 100, new SKPaint() { Color = SKColors.Black, TextSize = 15, IsAntialias = true });
                 e.Surface.Canvas.DrawText($"Bmx Handlebar Angle: {firstBmx.HandleBarsAngle}", 20, 120, new SKPaint() { Color = SKColors.Black, TextSize = 15, IsAntialias = true });
-                e.Surface.Canvas.DrawText($"Bearing to target: {GameEngine.AngleBetweenTwoPoints(firstBmx.Position, firstBmx.TargetPoint)}", 20, 140, new SKPaint() { Color = SKColors.Black, TextSize = 15, IsAntialias = true });
+                e.Surface.Canvas.DrawText($"Bearing to target: {firstBmx.Position.BearingTo(firstBmx.TargetPoint)}", 20, 140, new SKPaint() { Color = SKColors.Black, TextSize = 15, IsAntialias = true });
             }
 
             e.Surface.Canvas.DrawText($"{gameState.GameSpeed} Speed", 1600, 50, new SKPaint() { Color = SKColors.Black, TextSize = 50, IsAntialias = true });

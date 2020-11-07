@@ -56,12 +56,23 @@ namespace BMX
 
         private static void TurnHandleBarsTowardsTargetPoint(Bmx bmx)
         {
-            var bearingToTarget = AngleBetweenTwoPoints(bmx.Position, bmx.TargetPoint);
-            var handleBarAngle = bearingToTarget - bmx.FrameBearing;
+            var bearingToTarget = bmx.Position.BearingTo(bmx.TargetPoint);
+
+            var handleBarsAngle = TurnHandleBarsTowardsBearing(bmx, bearingToTarget);
+
+            bmx.HandleBarsAngle = handleBarsAngle;
+        }
+
+        internal static double TurnHandleBarsTowardsBearing(Bmx bmx, double bearing)
+        {
+            var handleBarAngle = bearing - bmx.FrameBearing;
+            if (handleBarAngle > 180) handleBarAngle -= 360;
+            if (handleBarAngle < -180) handleBarAngle += 360;
+
             if (handleBarAngle > MaxHandleBarTurnInDegrees) handleBarAngle = MaxHandleBarTurnInDegrees;
             if (handleBarAngle < -MaxHandleBarTurnInDegrees) handleBarAngle = -MaxHandleBarTurnInDegrees;
 
-            bmx.HandleBarsAngle = handleBarAngle;
+            return handleBarAngle;
         }
 
         private static void MoveBMXInCurrentDirection(Bmx bmx, int distanceToMove)
@@ -100,13 +111,6 @@ namespace BMX
             var wheelBase = 20; // This is determined by how far apart wheel centers are in rendering, we need to abstract this out
 
             return wheelBase / (steerAngle * Math.Cosine(CasterAngle)); // This should give an approximation of radius according to https://en.wikipedia.org/wiki/Bicycle_and_motorcycle_dynamics
-        }
-        public static double AngleBetweenTwoPoints(Vector2 origin, Vector2 end)
-        {
-            var xDiff = origin.X - end.X;
-            var yDiff = origin.Y - end.Y;
-            var radians = System.Math.Atan2(yDiff, xDiff);
-            return Math.RadiansToDegrees(radians);
         }
 
         private static Vector2 MoveXDistanceFromPointAToPointB(int distance, Vector2 pointA, Vector2 pointB)

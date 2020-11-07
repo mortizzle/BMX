@@ -32,5 +32,24 @@ namespace BMX.Tests
             Assert.Equal(expectedResult, result);
 
         }
+
+        [Theory]
+        // 90 degree angles
+        [InlineData(110,100,0)]
+        [InlineData(100, 110, 90)]
+        [InlineData(90, 100, 180)]
+        [InlineData(100, 90, 270)]
+        public void CanCalculateBearingCorrectly(int pointX, int pointY, float expectedResult)
+        {
+            // Arrange
+            var point = new Vector2(pointX, pointY);
+            var targetPoint = new Vector2(100, 100);
+
+            // Act
+            var result = point.BearingTo(targetPoint);
+
+            Assert.Equal(expectedResult, result);
+
+        }
     }
 }
