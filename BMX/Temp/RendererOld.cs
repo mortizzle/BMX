@@ -1,12 +1,12 @@
-﻿using SkiaSharp;
+﻿using BMX.Engine.Interfaces;
+using SkiaSharp;
 using SkiaSharp.Views.Desktop;
 using System;
 using System.Linq;
-using System.Windows.Forms;
 
-namespace BMX
+namespace BMX.Engine
 {
-    internal static class Renderer
+    internal static class RendererOld
     {
         public static void Render(SKPaintSurfaceEventArgs e, GameState gameState)
         {

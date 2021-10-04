@@ -1,10 +1,11 @@
-﻿using System.Linq;
+﻿using BMX.Engine.Interfaces;
+using System.Linq;
 using System.Numerics;
 using System.Windows.Forms;
 
-namespace BMX
+namespace BMX.Engine
 {
-    internal static class InputHandler
+    internal static class InputHandlerOld
     {
         public static GameState HandleMouseClick(MouseEventArgs e, GameState gameState)
         {
