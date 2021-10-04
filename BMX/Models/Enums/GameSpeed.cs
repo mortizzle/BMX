@@ -1,4 +1,4 @@
-﻿namespace BMX
+﻿namespace BMX.Models
 {
     public enum GameSpeed
     {

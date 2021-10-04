@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BMX.Models;
+using System;
 
 namespace BMX
 {

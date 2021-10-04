@@ -1,11 +1,12 @@
 ﻿using BMX.Engine.Interfaces;
+using BMX.Models;
 using System.Windows.Forms;
 
 namespace BMX.Engine
 {
     internal class InputHandler: IInputHandler
     {
-        public GameState HandleMouseClick(MouseEventArgs e, GameState gameState)
+        public ApplicationState HandleMouseClick(MouseEventArgs e, ApplicationState gameState)
         {
             return e.Button switch
             {
@@ -15,7 +16,7 @@ namespace BMX.Engine
             };
         }
 
-        public GameState HandleKeyPress(KeyPressEventArgs e, GameState gameState)
+        public ApplicationState HandleKeyPress(KeyPressEventArgs e, ApplicationState gameState)
         {
             return e.KeyChar switch
             {

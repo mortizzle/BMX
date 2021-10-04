@@ -4,13 +4,18 @@ using SkiaSharp;
 
 namespace BMX.Renderers
 {
-    internal class TerrainRenderer : ILayerRenderer
+    internal class MenuRenderer : ILayerRenderer
     {
-        public int ZLevel() => 0;
+        public int ZLevel() => 99;
+
+        public MenuRenderer()
+        {
+
+        }
 
         public void Render(SKCanvas canvas, ApplicationState applicationState)
         {
-            canvas.Clear(SKColors.LightGreen);
+            
         }
     }
 }

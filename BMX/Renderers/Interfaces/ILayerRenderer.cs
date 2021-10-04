@@ -1,10 +1,11 @@
-﻿using SkiaSharp;
+﻿using BMX.Models;
+using SkiaSharp;
 
 namespace BMX.Renderers.Interfaces
 {
     internal interface ILayerRenderer
     {
         int ZLevel();
-        void Render(SKCanvas canvas, GameState gameState);
+        void Render(SKCanvas canvas, ApplicationState applicationState);
     }
 }

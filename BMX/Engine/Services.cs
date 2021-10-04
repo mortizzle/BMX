@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using BMX.Engine.Interfaces;
 using BMX.Renderers;
-using BMX.Renderers.Interfaces;
 
 namespace BMX.Engine
 {

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BMX.Engine.Interfaces;
+using BMX.Models;
 
 namespace BMX
 {
@@ -13,7 +14,7 @@ namespace BMX
         private readonly IRenderEngine _renderer;
 
         private readonly SKControl _skView;
-        private GameState _gameState;
+        private ApplicationState _applicationState;
         private bool _runRenderLoop = true;
 
         public GameForm(IInputHandler inputHandler, IRenderEngine renderer)
@@ -33,34 +34,38 @@ namespace BMX
             _skView.MouseClick += HandleMouseClick;
             _skView.KeyPress += HandleKeyPress;
 
-            _gameState = new GameState();
+            _applicationState = new ApplicationState
+            {
+                GameState = new GameState(),
+                UIState = new UIState()
+            };
 
             _ = PresentLoop();
         }
 
         private void HandleMouseClick(object sender, MouseEventArgs e)
         {
-            _gameState = _inputHandler.HandleMouseClick(e, _gameState);
+            _applicationState = _inputHandler.HandleMouseClick(e, _applicationState);
         }
 
         private void HandleKeyPress(Object sender, KeyPressEventArgs e)
         {
-            _gameState = _inputHandler.HandleKeyPress(e, _gameState);
+            _applicationState = _inputHandler.HandleKeyPress(e, _applicationState);
         }
 
         private void Render(object sender, SKPaintSurfaceEventArgs e)
         {
-            _renderer.Render(e, _gameState);
+            _renderer.Render(e, _applicationState);
         }
 
         private async Task PresentLoop()
         {
             while (_runRenderLoop)
             {
-                _gameState = GameEngine.UpdateGameState(_gameState);
+                _applicationState = _applicationState with { GameState = GameEngine.UpdateGameState(_applicationState.GameState)};
                 _skView.Invalidate();
 
-                await Task.Delay(GameEngine.GetTickLength(_gameState)).ConfigureAwait(true);
+                await Task.Delay(GameEngine.GetTickLength(_applicationState.GameState)).ConfigureAwait(true);
             }
         }
 

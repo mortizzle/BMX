@@ -1,4 +1,5 @@
-﻿using System.Collections.Immutable;
+﻿using BMX.Models;
+using System.Collections.Immutable;
 using System.Numerics;
 
 namespace BMX
