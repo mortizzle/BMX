@@ -3,13 +3,13 @@ using System.Numerics;
 
 namespace BMX
 {
-    internal static class GameEngine
+    internal static class GameEngineOld
     {
         private const int BikeDistancePerTick = 5;
         private const int MaxHandleBarTurnInDegrees = 37; // Max turning angle of a bmx. Source - googling
         private const int CasterAngle = 22; // BMX generally have caster angle of between 21 and 24 degrees. Source - googling
 
-        public static GameState UpdateGameState(GameState gameState)
+        public static GameStateOld UpdateGameState(GameStateOld gameState)
         {
             if (gameState.Paused) return gameState;
 

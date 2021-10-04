@@ -6,9 +6,9 @@ namespace BMX.Renderers
 {
     internal class TerrainRenderer : ILayerRenderer
     {
-        public int GetHeight() => 0;
+        public int ZLevel() => 0;
 
-        public void Render(SKCanvas canvas)
+        public void Render(SKCanvas canvas, GameState gameState)
         {
             canvas.Clear(SKColors.LightGreen);
         }

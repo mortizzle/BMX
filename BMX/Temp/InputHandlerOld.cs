@@ -7,7 +7,7 @@ namespace BMX.Engine
 {
     internal static class InputHandlerOld
     {
-        public static GameState HandleMouseClick(MouseEventArgs e, GameState gameState)
+        public static GameStateOld HandleMouseClick(MouseEventArgs e, GameStateOld gameState)
         {
             return e.Button switch
             {
@@ -17,7 +17,7 @@ namespace BMX.Engine
             };
         }
 
-        public static GameState HandleKeyPress(KeyPressEventArgs e, GameState gameState)
+        public static GameStateOld HandleKeyPress(KeyPressEventArgs e, GameStateOld gameState)
         {
             return e.KeyChar switch
             {
@@ -29,7 +29,7 @@ namespace BMX.Engine
             };
         }
 
-        private static GameState IncreaseSpeed(GameState gameState) 
+        private static GameStateOld IncreaseSpeed(GameStateOld gameState) 
         {
             var currentSpeed = gameState.GameSpeed;
             if (currentSpeed == GameSpeed.Normal) return gameState;
@@ -37,7 +37,7 @@ namespace BMX.Engine
             return gameState with { GameSpeed = currentSpeed + 1 };
         }
 
-        private static GameState DecreaseSpeed(GameState gameState)
+        private static GameStateOld DecreaseSpeed(GameStateOld gameState)
         {
             var currentSpeed = gameState.GameSpeed;
             if (currentSpeed == GameSpeed.Snail) return gameState;

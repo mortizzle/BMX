@@ -4,7 +4,7 @@ namespace BMX.Renderers.Interfaces
 {
     internal interface ILayerRenderer
     {
-        int GetHeight();
-        void Render(SKCanvas canvas);
+        int ZLevel();
+        void Render(SKCanvas canvas, GameState gameState);
     }
 }

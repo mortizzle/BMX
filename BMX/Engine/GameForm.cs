@@ -15,7 +15,6 @@ namespace BMX
         private readonly SKControl _skView;
         private GameState _gameState;
         private bool _runRenderLoop = true;
-        private const int GameTickLengthMS = 16;
 
         public GameForm(IInputHandler inputHandler, IRenderEngine renderer)
         {

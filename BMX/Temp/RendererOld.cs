@@ -8,7 +8,7 @@ namespace BMX.Engine
 {
     internal static class RendererOld
     {
-        public static void Render(SKPaintSurfaceEventArgs e, GameState gameState)
+        public static void Render(SKPaintSurfaceEventArgs e, GameStateOld gameState)
         {
             e.Surface.Canvas.Clear(SKColors.LightGreen);
 

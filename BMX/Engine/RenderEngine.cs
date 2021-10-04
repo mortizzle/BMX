@@ -18,9 +18,9 @@ namespace BMX.Engine
 
         public void Render(SKPaintSurfaceEventArgs e, GameState gameState)
         {
-            foreach(var layerRenderer in _layerRenderers.OrderBy(renderer => renderer.GetHeight()))
+            foreach(var layerRenderer in _layerRenderers.OrderBy(renderer => renderer.ZLevel()))
             {
-                layerRenderer.Render(e.Surface.Canvas);
+                layerRenderer.Render(e.Surface.Canvas, gameState);
             }
             
         }

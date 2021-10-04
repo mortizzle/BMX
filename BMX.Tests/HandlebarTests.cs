@@ -21,7 +21,7 @@ namespace BMX.Tests
             var bmx = new Bmx() { FrameBearing = frameBearing };
 
             // Act
-            var result = GameEngine.TurnHandleBarsTowardsBearing(bmx, targetBearing);
+            var result = GameEngineOld.TurnHandleBarsTowardsBearing(bmx, targetBearing);
 
             // Assert
             Assert.Equal(expectedHandlebarAngle, result);
