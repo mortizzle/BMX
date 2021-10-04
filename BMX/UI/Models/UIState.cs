@@ -4,6 +4,6 @@ namespace BMX.UI.Models
 {
     internal record UIState
     {
-        ImmutableList<MenuState> Menus { get; set; }
+        public ImmutableList<MenuState> Menus { get; set; }
     }
 }

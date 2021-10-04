@@ -4,7 +4,7 @@ using SkiaSharp;
 
 namespace BMX.Renderers
 {
-    internal class TerrainRenderer : ILayerRenderer
+    internal class TerrainLayerRenderer : ILayerRenderer
     {
         public int ZLevel() => 0;
 

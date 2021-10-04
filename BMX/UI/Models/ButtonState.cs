@@ -4,8 +4,8 @@ namespace BMX.UI.Models
 {
     internal class ButtonState
     {
-        IButtonController Controller {  get; set; }
-        int XPos { get; set; }
-        int YPos { get; set; }
+        public IButtonController Controller {  get; set; }
+        public int XPos { get; set; }
+        public int YPos { get; set; }
     }
 }

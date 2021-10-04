@@ -5,9 +5,9 @@ namespace BMX.UI.Models
 {
     internal class MenuState
     {
-        IMenuController Controller { get; set; }
-        ImmutableList<ButtonState> Buttons { get; set; }
-        int XPos { get; set;  }
-        int YPos { get; set; }
+        public IMenuController Controller { get; set; }
+        public ImmutableList<ButtonState> Buttons { get; set; }
+        public int XPos { get; set;  }
+        public int YPos { get; set; }
     }
 }

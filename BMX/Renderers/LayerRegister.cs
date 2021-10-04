@@ -8,8 +8,8 @@ namespace BMX.Renderers
         internal static void RegisterImplementations(ServiceCollection serviceCollection)
         {
             serviceCollection
-                .AddScoped<ILayerRenderer, TerrainRenderer>()
-                .AddScoped<ILayerRenderer, MenuRenderer>();
+                .AddScoped<ILayerRenderer, TerrainLayerRenderer>()
+                .AddScoped<ILayerRenderer, MenuLayerRenderer>();
         }
     }
 }

@@ -4,18 +4,18 @@ using SkiaSharp;
 
 namespace BMX.Renderers
 {
-    internal class MenuRenderer : ILayerRenderer
+    internal class MenuLayerRenderer : ILayerRenderer
     {
         public int ZLevel() => 99;
 
-        public MenuRenderer()
+        public MenuLayerRenderer()
         {
 
         }
 
         public void Render(SKCanvas canvas, ApplicationState applicationState)
         {
-            
+            applicationState.UIState.Menus.ForEach(menu => menu.Controller)
         }
     }
 }

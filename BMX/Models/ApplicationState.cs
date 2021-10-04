@@ -1,4 +1,6 @@
-﻿namespace BMX.Models
+﻿using BMX.UI.Models;
+
+namespace BMX.Models
 {
     internal record ApplicationState
     {
