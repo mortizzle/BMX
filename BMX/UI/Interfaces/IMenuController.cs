@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BMX.UI.Interfaces
 {
-    internal interface IMenu
+    internal interface IMenuController
     {
     }
 }

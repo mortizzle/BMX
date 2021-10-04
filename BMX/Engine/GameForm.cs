@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BMX.Engine.Interfaces;
 using BMX.Models;
+using BMX.UI.Models;
 
 namespace BMX
 {
@@ -12,16 +13,17 @@ namespace BMX
     {
         private readonly IInputHandler _inputHandler;
         private readonly IRenderEngine _renderer;
+        private readonly IGameEngine _gameEngine;
 
         private readonly SKControl _skView;
         private ApplicationState _applicationState;
         private bool _runRenderLoop = true;
 
-        public GameForm(IInputHandler inputHandler, IRenderEngine renderer)
+        public GameForm(IInputHandler inputHandler, IRenderEngine renderer, IGameEngine gameEngine)
         {
             _inputHandler = inputHandler;
             _renderer = renderer;
-
+            _gameEngine = gameEngine;
 
             Text = "BMX";
             ClientSize = new Size(1920, 1080);
@@ -41,6 +43,7 @@ namespace BMX
             };
 
             _ = PresentLoop();
+            
         }
 
         private void HandleMouseClick(object sender, MouseEventArgs e)
@@ -62,10 +65,10 @@ namespace BMX
         {
             while (_runRenderLoop)
             {
-                _applicationState = _applicationState with { GameState = GameEngine.UpdateGameState(_applicationState.GameState)};
+                _applicationState = _applicationState with { GameState = _gameEngine.UpdateGameState(_applicationState.GameState)};
                 _skView.Invalidate();
 
-                await Task.Delay(GameEngine.GetTickLength(_applicationState.GameState)).ConfigureAwait(true);
+                await Task.Delay(_gameEngine.GetTickLength(_applicationState.GameState)).ConfigureAwait(true);
             }
         }
 

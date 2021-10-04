@@ -1,11 +1,12 @@
-﻿using BMX.Models;
+﻿using BMX.Engine.Interfaces;
+using BMX.Models;
 using System;
 
 namespace BMX
 {
-    internal static class GameEngine
+    internal class GameEngine : IGameEngine
     {
-        public static GameState UpdateGameState(GameState gameState)
+        public GameState UpdateGameState(GameState gameState)
         {
             if (gameState.Paused) return gameState;
 
@@ -14,7 +15,7 @@ namespace BMX
             return gameState;
         }
 
-        internal static int GetTickLength(GameState gameState)
+        public int GetTickLength(GameState gameState)
         {
             return gameState.GameSpeed switch
             {

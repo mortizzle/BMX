@@ -11,9 +11,10 @@ namespace BMX.Engine
             var services = new ServiceCollection();
 
             services
-             .AddScoped<GameForm>()
-             .AddScoped<IInputHandler, InputHandler>()
-             .AddScoped<IRenderEngine, RenderEngine>();
+                .AddScoped<GameForm>()
+                .AddScoped<IInputHandler, InputHandler>()
+                .AddScoped<IRenderEngine, RenderEngine>()
+                .AddScoped<IGameEngine, GameEngine>();
              
             LayerRegister.RegisterImplementations(services);
 
