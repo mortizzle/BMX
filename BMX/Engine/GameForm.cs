@@ -6,6 +6,8 @@ using System.Windows.Forms;
 using BMX.Engine.Interfaces;
 using BMX.Models;
 using BMX.UI.Models;
+using System.Collections.Immutable;
+using BMX.UI.Interfaces;
 
 namespace BMX
 {
@@ -19,7 +21,7 @@ namespace BMX
         private ApplicationState _applicationState;
         private bool _runRenderLoop = true;
 
-        public GameForm(IInputHandler inputHandler, IRenderEngine renderer, IGameEngine gameEngine)
+        public GameForm(IInputHandler inputHandler, IRenderEngine renderer, IGameEngine gameEngine, IMenuFactory menuFactory)
         {
             _inputHandler = inputHandler;
             _renderer = renderer;
@@ -39,7 +41,10 @@ namespace BMX
             _applicationState = new ApplicationState
             {
                 GameState = new GameState(),
-                UIState = new UIState()
+                UIState = new UIState
+                {
+                    Menus = ImmutableList.Create(menuFactory.CreateMainMenu())
+                }
             };
 
             _ = PresentLoop();

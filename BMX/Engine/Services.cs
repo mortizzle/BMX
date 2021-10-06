@@ -17,6 +17,7 @@ namespace BMX.Engine
                 .AddScoped<IGameEngine, GameEngine>();
              
             LayerRegister.RegisterImplementations(services);
+            UIRegister.RegisterImplementations(services);
 
             return services;
         }
