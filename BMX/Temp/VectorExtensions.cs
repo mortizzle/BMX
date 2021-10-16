@@ -1,7 +1,4 @@
-﻿using System.DirectoryServices;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Numerics;
+﻿using System.Numerics;
 
 namespace BMX
 {

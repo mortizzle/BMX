@@ -2,7 +2,7 @@
 
 namespace BMX.UI.Models
 {
-    internal record UIState
+    public record UIState
     {
         public ImmutableList<MenuState> Menus { get; set; }
     }

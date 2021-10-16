@@ -1,6 +1,6 @@
 ﻿namespace BMX.Models
 {
-    internal record GameState
+    public record GameState
     {
         public bool Paused { get; set; }
         public long GameTicks { get; set; }

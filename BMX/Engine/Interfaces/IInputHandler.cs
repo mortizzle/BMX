@@ -1,11 +1,11 @@
 ﻿using BMX.Models;
-using System.Windows.Forms;
+using BMX.UI.Models;
 
 namespace BMX.Engine.Interfaces
 {
-    internal interface IInputHandler
+    public interface IInputHandler
     {
-        ApplicationState HandleMouseClick(MouseEventArgs e, ApplicationState gameState);
-        ApplicationState HandleKeyPress(KeyPressEventArgs e, ApplicationState gameState);
+        ApplicationState HandleMouseClick(MouseButton mouseButton, int mouseX, int mouseY, ApplicationState applicationState);
+        ApplicationState HandleKeyPress(char keyPressed, ApplicationState gameState);
     }
 }

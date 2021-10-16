@@ -1,26 +1,26 @@
 ﻿using BMX.Engine.Interfaces;
 using BMX.Models;
+using BMX.UI.Models;
 using System.Linq;
 using System.Numerics;
-using System.Windows.Forms;
 
 namespace BMX.Engine
 {
     internal static class InputHandlerOld
     {
-        public static GameStateOld HandleMouseClick(MouseEventArgs e, GameStateOld gameState)
+        public static GameStateOld HandleMouseClick(MouseButton mouseButton, float mouseX, float mouseY, GameStateOld gameState)
         {
-            return e.Button switch
+            return mouseButton switch
             {
-                MouseButtons.Left => gameState.WithAdditionalTrackSegment(new TrackSegment { Position = new Vector2(e.X, e.Y), Type = TrackType.Straight }),
-                MouseButtons.Right => gameState.WithAdditionalTrackSegment(new TrackSegment { Position = new Vector2(e.X, e.Y), Type = TrackType.FinishLine }),
+                MouseButton.Left => gameState.WithAdditionalTrackSegment(new TrackSegment { Position = new Vector2(mouseX, mouseY), Type = TrackType.Straight }),
+                MouseButton.Right => gameState.WithAdditionalTrackSegment(new TrackSegment { Position = new Vector2(mouseX, mouseY), Type = TrackType.FinishLine }),
                 _ => throw new System.NotImplementedException()
             };
         }
 
-        public static GameStateOld HandleKeyPress(KeyPressEventArgs e, GameStateOld gameState)
+        public static GameStateOld HandleKeyPress(char keyPressed, float keyX, float keyY, GameStateOld gameState)
         {
-            return e.KeyChar switch
+            return keyPressed switch
             {
                 ' ' => gameState.WithAdditionalBmxes(new Bmx { Position = gameState.TrackSegments.First().Position, TargetPoint = gameState.TrackSegments.Skip(1).First().Position }),
                 'p' => gameState with { Paused = !gameState.Paused },

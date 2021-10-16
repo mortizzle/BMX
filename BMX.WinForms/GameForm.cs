@@ -1,13 +1,9 @@
-﻿using SkiaSharp.Views.Desktop;
-using System;
-using System.Drawing;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using BMX.Engine.Interfaces;
+﻿using BMX.Engine.Interfaces;
 using BMX.Models;
 using BMX.UI.Models;
 using System.Collections.Immutable;
 using BMX.UI.Interfaces;
+using SkiaSharp.Views.Desktop;
 
 namespace BMX
 {
@@ -53,17 +49,17 @@ namespace BMX
 
         private void HandleMouseClick(object sender, MouseEventArgs e)
         {
-            _applicationState = _inputHandler.HandleMouseClick(e, _applicationState);
+            _applicationState = _inputHandler.HandleMouseClick(ConvertButtons(e.Button), e.X, e.Y, _applicationState);
         }
 
         private void HandleKeyPress(Object sender, KeyPressEventArgs e)
         {
-            _applicationState = _inputHandler.HandleKeyPress(e, _applicationState);
+            _applicationState = _inputHandler.HandleKeyPress(e.KeyChar, _applicationState);
         }
 
         private void Render(object sender, SKPaintSurfaceEventArgs e)
         {
-            _renderer.Render(e, _applicationState);
+            _renderer.Render(e.Surface.Canvas, _applicationState);
         }
 
         private async Task PresentLoop()
@@ -85,6 +81,16 @@ namespace BMX
                 _skView.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private MouseButton ConvertButtons(MouseButtons mouseButtons)
+        {
+            return mouseButtons switch
+            {
+                MouseButtons.Left => MouseButton.Left,
+                MouseButtons.Right => MouseButton.Right,
+                _ => throw new NotImplementedException()
+            };
         }
     }
 }

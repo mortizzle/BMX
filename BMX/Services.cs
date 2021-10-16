@@ -1,25 +1,23 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using BMX.Engine.Interfaces;
 using BMX.Renderers;
+using BMX.Actions;
+using BMX.Engine;
 
-namespace BMX.Engine
+namespace BMX
 {
-    internal static class Services
+    public static class Services
     {
-        internal static ServiceCollection ConfigureServices()
+        public static void ConfigureServices(ServiceCollection services)
         {
-            var services = new ServiceCollection();
-
             services
-                .AddScoped<GameForm>()
                 .AddScoped<IInputHandler, InputHandler>()
                 .AddScoped<IRenderEngine, RenderEngine>()
                 .AddScoped<IGameEngine, GameEngine>();
              
             LayerRegister.RegisterImplementations(services);
             UIRegister.RegisterImplementations(services);
-
-            return services;
+            ActionRegister.RegisterActions(services);
         }
     }
 }

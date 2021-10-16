@@ -2,7 +2,6 @@
 using BMX.Models;
 using BMX.Renderers.Interfaces;
 using SkiaSharp;
-using SkiaSharp.Views.Desktop;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,11 +16,11 @@ namespace BMX.Engine
             _layerRenderers = layerRenderers;
         }
 
-        public void Render(SKPaintSurfaceEventArgs e, ApplicationState applicationState)
+        public void Render(SKCanvas canvas, ApplicationState applicationState)
         {
             foreach(var layerRenderer in _layerRenderers.OrderBy(renderer => renderer.ZLevel()))
             {
-                layerRenderer.Render(e.Surface.Canvas, applicationState);
+                layerRenderer.Render(canvas, applicationState);
             }
             
         }

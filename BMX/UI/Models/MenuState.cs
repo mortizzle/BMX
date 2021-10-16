@@ -2,7 +2,7 @@
 
 namespace BMX.UI.Models
 {
-    internal class MenuState
+    public class MenuState
     {
         public ImmutableList<ButtonState> Buttons { get; set; }
         public int XPos { get; set;  }

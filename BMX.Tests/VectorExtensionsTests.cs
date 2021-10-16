@@ -1,5 +1,3 @@
-using OpenTK.Graphics.ES20;
-using System.Drawing;
 using System.Numerics;
 using Xunit;
 

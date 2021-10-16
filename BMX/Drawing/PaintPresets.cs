@@ -45,8 +45,7 @@ namespace BMX.Drawing
         public static SKPaint ButtonText = new SKPaint()
         {
             Color = SKColors.Black,
-            Style = SKPaintStyle.Stroke,
-            TextSize = 23,
+            Style = SKPaintStyle.Fill,
             IsAntialias = true
         };
     }

@@ -2,7 +2,7 @@ using System;
 using System.Windows.Forms;
 using BMX.Engine;
 
-namespace BMX
+namespace BMX.WinForms
 {
     static class Program
     {

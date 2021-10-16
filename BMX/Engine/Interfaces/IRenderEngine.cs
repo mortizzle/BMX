@@ -1,10 +1,10 @@
 ﻿using BMX.Models;
-using SkiaSharp.Views.Desktop;
+using SkiaSharp;
 
 namespace BMX.Engine.Interfaces
 {
-    internal interface IRenderEngine
+    public interface IRenderEngine
     {
-        void Render(SKPaintSurfaceEventArgs e, ApplicationState applicationState);
+        void Render(SKCanvas canvas, ApplicationState applicationState);
     }
 }

@@ -1,14 +1,15 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Windows.Forms;
 
-namespace BMX.Engine
+namespace BMX.WinForms
 {
     internal static class GameRunner
     {
         internal static void Run(Action<Form> runGameForm)
         {
-            using (ServiceProvider serviceProvider = Services.ConfigureServices().BuildServiceProvider())
+            var serviceCollection = new ServiceCollection();
+            Services.ConfigureServices(serviceCollection);
+
+            using (ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider())
             {
                 var gameForm = serviceProvider.GetRequiredService<GameForm>();
                 runGameForm(gameForm);

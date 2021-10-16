@@ -2,8 +2,9 @@
 
 namespace BMX.UI.Interfaces
 {
-    internal interface IMenuFactory
+    public interface IMenuFactory
     {
         MenuState CreateMainMenu();
+        MenuState CreateToolbar();
     }
 }

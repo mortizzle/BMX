@@ -2,7 +2,7 @@
 
 namespace BMX.Models
 {
-    internal record ApplicationState
+    public record ApplicationState
     {
         public GameState GameState { get; set; }
         public UIState UIState { get; set; }
