@@ -1,37 +1,85 @@
 ﻿@page "/"
-
-<h1>Raster (Bitmap) Canvas</h1>
-
-<p>The canvas below is using pixels in memory. Click and drag to move the text.</p>
+@using BMX.Drawing
+@using BMX.Engine.Interfaces
+@using BMX.Models
+@using BMX.UI.Interfaces
+@using BMX.UI.Models
+@using System.Collections.Immutable
+@using System.Drawing
+@inject IInputHandler _inputHandler;
+@inject IRenderEngine _renderer;
+@inject IGameEngine _gameEngine;
+@inject IMenuFactory _menuFactory;
+@inject ITimer _timer;
 
 <div class="container">
     <div class="row">
         <div class="col border rounded p-2 canvas-container">
 
             <SKCanvasView
-                @ref="skiaView" OnPaintSurface="OnPaintSurface" IgnorePixelScaling="true"
-                @onpointerdown"OnPointerDown"
-                @onkeypress="OnKeyPress"
-                style="position:absolute; left:0px; top:0px; width: 100vw; height: 100vh;"/>
+                @ref="_skView" OnPaintSurface="OnPaintSurface"
+                @onpointerdown="OnPointerDown"
+                style="position:absolute; left:0px; top:0px; width: 100vw; height: 100vh;"
+                EnableRenderLoop/>
 
         </div>
     </div>
 </div>
 
 @code {
-    SKCanvasView skiaView = null!;
+    SKCanvasView _skView = null!;
     SKPoint? touchLocation;
+    Point point = new Point();
+    int ticks = 0;
+    ApplicationState _applicationState = null!;
     [Inject] IJSRuntime JS { get; set; } = null!;
+
+    protected override void OnInitialized()
+    {
+        _applicationState = new ApplicationState
+        {
+            GameState = new GameState(),
+            UIState = new UIState
+            {
+                Menus = ImmutableList.Create(_menuFactory.CreateMainMenu())
+            }
+        };
+
+        if (_timer != null)
+        {
+            _timer.Interval = 16;
+            _timer.Elapsed += GameLoopTimerElapsed;
+            _timer.Start();
+        }
+    }
+
+    private void GameLoopTimerElapsed(object? sender, EventArgs e) => PresentLoop();
+
+    void PresentLoop()
+    {
+        _applicationState = _applicationState with { GameState = _gameEngine.UpdateGameState(_applicationState.GameState)};
+        _skView.Invalidate();
+        ticks++;
+    }
 
     void OnPaintSurface(SKPaintSurfaceEventArgs e)
     {
+        _renderer.Render(e.Surface.Canvas, _applicationState);
+        e.Surface.Canvas.DrawText($"{point.X},{point.Y}", new SKPoint(25, 25), PaintPresets.ButtonText);
+        e.Surface.Canvas.DrawText($"{ticks} ticks elapsed", new SKPoint(25, 45), PaintPresets.ButtonText);
     }
 
     void OnPointerDown(PointerEventArgs e)
     {
-    }
-
-    void OnKeyPress(KeyboardEventArgs e)
-    {
+        var button = e.Button switch
+        {
+            0 => MouseButton.Left,
+            2 => MouseButton.Right,
+            _ => MouseButton.Other
+        };
+        var x = (int) e.OffsetX;
+        var y = (int) e.OffsetY;
+        point = new Point(x, y);
+        _applicationState = _inputHandler.HandleMouseClick(button, x, y, _applicationState);
     }
 }

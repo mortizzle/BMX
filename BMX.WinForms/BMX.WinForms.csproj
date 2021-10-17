@@ -18,9 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="GameForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="GameForm.cs" />
   </ItemGroup>
 
 </Project>

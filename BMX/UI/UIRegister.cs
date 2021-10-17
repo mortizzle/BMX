@@ -7,7 +7,7 @@ namespace BMX.Renderers
 {
     internal static class UIRegister
     {
-        internal static void RegisterImplementations(ServiceCollection serviceCollection)
+        internal static void RegisterImplementations(IServiceCollection serviceCollection)
         {
             serviceCollection
                 .AddScoped<IMenuFactory, MenuFactory>();

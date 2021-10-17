@@ -8,7 +8,7 @@ namespace BMX
 {
     public static class Services
     {
-        public static void ConfigureServices(ServiceCollection services)
+        public static void ConfigureServices(IServiceCollection services)
         {
             services
                 .AddScoped<IInputHandler, InputHandler>()

@@ -17,21 +17,14 @@ namespace BMX.Renderers
 
         private void RenderMenu(SKCanvas canvas, MenuState menuState)
         {
-            canvas.DrawRect(0, 0, menuState.Width, menuState.Height, PaintPresets.MenuBackground);
-            canvas.DrawRect(0, 0, menuState.Width, menuState.Height, PaintPresets.MenuBackgroundBorder);
+            canvas.DrawRoundRect(0, 0, menuState.Width, menuState.Height, 10,10, PaintPresets.MenuBackground);
 
             menuState.Buttons.ForEach(buttonState => canvas.At(buttonState.XPos, buttonState.YPos, (canvas) => RenderButton(canvas, buttonState)));
         }
 
         private void RenderButton(SKCanvas canvas, ButtonState buttonState)
         {
-            canvas.DrawRect(0, 0, buttonState.Width, buttonState.Height, PaintPresets.ButtonBackground);
-
-            canvas.DrawLine(0, 0, buttonState.Width, 0, PaintPresets.ButtonShadowBorder);
-            canvas.DrawLine(0, 0, 0, buttonState.Height, PaintPresets.ButtonShadowBorder);
-
-            canvas.DrawLine(buttonState.Width, 0, buttonState.Width, buttonState.Height, PaintPresets.ButtonHighlightBorder);
-            canvas.DrawLine(0, buttonState.Height, buttonState.Width, buttonState.Height, PaintPresets.ButtonHighlightBorder);
+            canvas.DrawRoundRect(0, 0, buttonState.Width, buttonState.Height, 10,10, PaintPresets.ButtonBackground);
 
             var textPaint = PaintPresets.ButtonText;
             textPaint.TextSize = buttonState.TextSize;
