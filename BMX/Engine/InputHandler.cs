@@ -33,7 +33,7 @@ namespace BMX.Engine
             {
                 if (ButtonContainsPoint(button, location))
                 {
-                    System.Console.WriteLine("BOOP");
+                    return button.OnClick(applicationState);
                 }
             }
             return applicationState;

@@ -4,6 +4,7 @@
     {
         StartLine,
         Straight,
-        FinishLine
+        FinishLine,
+        Curved
     }
 }

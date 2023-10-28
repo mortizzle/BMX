@@ -2,7 +2,7 @@
 using BMX.Models;
 using BMX.UI.Models;
 using System.Collections.Immutable;
-using BMX.UI.Interfaces;
+using BMX.UI;
 using SkiaSharp.Views.Desktop;
 
 namespace BMX
@@ -17,7 +17,7 @@ namespace BMX
         private ApplicationState _applicationState;
         private bool _runRenderLoop = true;
 
-        public GameForm(IInputHandler inputHandler, IRenderEngine renderer, IGameEngine gameEngine, IMenuFactory menuFactory)
+        public GameForm(IInputHandler inputHandler, IRenderEngine renderer, IGameEngine gameEngine)
         {
             _inputHandler = inputHandler;
             _renderer = renderer;
@@ -39,7 +39,7 @@ namespace BMX
                 GameState = new GameState(),
                 UIState = new UIState
                 {
-                    Menus = ImmutableList.Create(menuFactory.CreateMainMenu())
+                    Menus = ImmutableList.Create(MenuFactory.CreateMainMenu())
                 }
             };
 

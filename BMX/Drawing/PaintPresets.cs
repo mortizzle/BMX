@@ -25,5 +25,13 @@ namespace BMX.Drawing
             Style = SKPaintStyle.Fill,
             IsAntialias = true
         };
+
+        public static SKPaint ButtonBorder = new SKPaint()
+        {
+            Color = SKColors.Gray.WithAlpha(0xD0),
+            Style = SKPaintStyle.Stroke,
+            StrokeWidth = 4,
+            IsAntialias = true
+        };
     }
 }

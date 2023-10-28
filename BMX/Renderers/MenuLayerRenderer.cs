@@ -24,16 +24,11 @@ namespace BMX.Renderers
 
         private void RenderButton(SKCanvas canvas, ButtonState buttonState)
         {
-            canvas.DrawRoundRect(0, 0, buttonState.Width, buttonState.Height, 10,10, PaintPresets.ButtonBackground);
-
-            var textPaint = PaintPresets.ButtonText;
-            textPaint.TextSize = buttonState.TextSize;
-
-            var textSizeInPx = textPaint.TextSize * 72 / 96; // Points to pixel conversion
-
-            var textY = buttonState.Height / 2 + textSizeInPx/2;
-            var textX = buttonState.Width / 2 - (buttonState.Text.Length * textSizeInPx * 0.45f); // Not quite right but good enough
-            canvas.DrawText(buttonState.Text, textX, textY, textPaint);
+            canvas.Save();
+            canvas.ClipRoundRect(new SKRoundRect(new SKRect(0,0,buttonState.Width, buttonState.Height), 10));
+            buttonState.Render(canvas);
+            canvas.DrawRoundRect(new SKRoundRect(new SKRect(0, 0, buttonState.Width, buttonState.Height), 10), PaintPresets.ButtonBorder);
+            canvas.Restore();
         }
     }
 }

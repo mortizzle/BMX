@@ -2,14 +2,13 @@
 @using BMX.Drawing
 @using BMX.Engine.Interfaces
 @using BMX.Models
-@using BMX.UI.Interfaces
+@using BMX.UI
 @using BMX.UI.Models
 @using System.Collections.Immutable
 @using System.Drawing
 @inject IInputHandler _inputHandler;
 @inject IRenderEngine _renderer;
 @inject IGameEngine _gameEngine;
-@inject IMenuFactory _menuFactory;
 @inject ITimer _timer;
 
 <div class="container">
@@ -41,7 +40,7 @@
             GameState = new GameState(),
             UIState = new UIState
             {
-                Menus = ImmutableList.Create(_menuFactory.CreateMainMenu())
+                Menus = ImmutableList.Create(MenuFactory.CreateMainMenu())
             }
         };
 

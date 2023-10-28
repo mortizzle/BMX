@@ -1,12 +1,12 @@
-﻿using BMX.UI.Interfaces;
+﻿using BMX.Actions;
 using BMX.UI.Models;
 using System.Collections.Immutable;
 
 namespace BMX.UI
 {
-    internal class MenuFactory : IMenuFactory
+    public static class MenuFactory
     {
-        public MenuState CreateMainMenu()
+        public static MenuState CreateMainMenu()
         {
             return new MenuState
             {
@@ -22,31 +22,29 @@ namespace BMX.UI
                     YPos = 100,
                     Width = 200,
                     Height = 50,
-                    Text = "New Game",
-                    TextSize = 23,
-                    ActionType = ActionType.NewGame
+                    Render = ButtonRendererFactory.CreateTextButtonRenderer(width: 200, height: 50,text: "New Game", textSize: 23),
+                    OnClick = ActionHandler.HandleNewGame
                 })
             };
         }
 
-        public MenuState CreateToolbar()
+        public static MenuState CreateToolbar()
         {
             return new MenuState
             {
-                XPos = 0,
-                YPos = 0,
+                XPos = 10,
+                YPos = 25,
 
-                Width = 300,
+                Width = 150,
                 Height = 1000,
 
                 Buttons = ImmutableList.Create(new ButtonState
                 {
-                    XPos = 150,
-                    YPos = 100,
-                    Width = 200,
-                    Height = 50,
-                    Text = "Test",
-                    TextSize = 23
+                    XPos = 25,
+                    YPos = 25,
+                    Width = 100,
+                    Height = 100,
+                    Render = ButtonRendererFactory.CreateCurvedTrackRenderer()
                 })
             };
         }

@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BMX.Tests", "BMX.Tests\BMX.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BMX.Blazor", "BMX.Blazor\BMX.Blazor.csproj", "{AC51FC8E-51A3-4F26-979C-315C05909CDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BMX.WinForms", "BMX.WinForms\BMX.WinForms.csproj", "{F654347B-F88C-4AF3-86C9-ACA773453C06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BMX.WinForms", "BMX.WinForms\BMX.WinForms.csproj", "{F654347B-F88C-4AF3-86C9-ACA773453C06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
